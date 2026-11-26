@@ -14,7 +14,7 @@ public class TurretController : MonoBehaviour
 
     [Header("Aiming")]
     public float sensitivity = 0.12f;       // degrees per mouse pixel
-    public float minPitch = -10f;
+    public float minPitch = -60f;
     public float maxPitch = 80f;
     public float yawLimit = 180f;           // total +/- from start heading (180 = free spin)
 

@@ -1,7 +1,7 @@
 using UnityEngine;
 
 /// <summary>
-/// Builds a minimal playable scene (ground, base, turret, targets) at Play time
+/// Builds a minimal playable scene (ground, base, turret) at Play time
 /// ONLY when the open scene has no TurretController. It never touches the saved
 /// scene file, so it can't cause merge conflicts with Kyle's environment work.
 /// Once the real scene has a turret, this does nothing.
@@ -44,16 +44,6 @@ public static class SceneScaffold
         var controller = turret.AddComponent<TurretController>();
         controller.head = head.transform;
         controller.aimCamera = cam;
-
-        // Placeholder targets in an arc in front of the turret.
-        for (int i = 0; i < 7; i++)
-        {
-            float angle = Mathf.Lerp(-60f, 60f, i / 6f) * Mathf.Deg2Rad;
-            float dist = 22f + (i % 2) * 6f;
-            var pos = new Vector3(Mathf.Sin(angle) * dist, 3f + (i % 3) * 2.5f, Mathf.Cos(angle) * dist);
-            var t = Make(PrimitiveType.Cube, "TestTarget " + i, pos, Vector3.one * 2f, new Color(0.9f, 0.35f, 0.2f));
-            t.AddComponent<TestTarget>();
-        }
     }
 
     static GameObject Make(PrimitiveType type, string name, Vector3 pos, Vector3 scale, Color color)
