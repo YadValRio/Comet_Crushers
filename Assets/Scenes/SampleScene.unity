@@ -477,20 +477,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AsteroidManager
   asteroidPrefab: {fileID: 6748287405208082084, guid: 9fc4816eff7f9413c9fed29bf413259b, type: 3}
-  textures:
-  - {fileID: 2800000, guid: 2d27701f5db94ec449d06e4664b5ed81, type: 3}
-  - {fileID: 2800000, guid: 42d6748ca88ee0d499876fb00495d4c3, type: 3}
-  - {fileID: 2800000, guid: b1ef1b50d2dd51a4c9454be6780dd41f, type: 3}
-  meshes:
-  - {fileID: 1586428044625075342, guid: 78499d97230fe0748a3fc15499c77d48, type: 3}
-  - {fileID: 7053893933298424306, guid: 78499d97230fe0748a3fc15499c77d48, type: 3}
-  - {fileID: 8785904777027576729, guid: 78499d97230fe0748a3fc15499c77d48, type: 3}
-  - {fileID: 1350605415201388534, guid: 78499d97230fe0748a3fc15499c77d48, type: 3}
-  - {fileID: 4752333041851442042, guid: 78499d97230fe0748a3fc15499c77d48, type: 3}
-  - {fileID: -3923832794788286368, guid: 78499d97230fe0748a3fc15499c77d48, type: 3}
-  - {fileID: -3146619269759647760, guid: 78499d97230fe0748a3fc15499c77d48, type: 3}
-  - {fileID: -3277066133253659789, guid: 78499d97230fe0748a3fc15499c77d48, type: 3}
-  - {fileID: 2584285111326269238, guid: 78499d97230fe0748a3fc15499c77d48, type: 3}
   initialCount: 6
   maxActiveAsteroids: 12
   spawnInterval: 3
@@ -503,6 +489,7 @@ MonoBehaviour:
   minSpeed: 1.5
   maxSpeed: 5
   rotationSpeed: 35
+  scoreFontSize: 20
 --- !u!1001 &1719908301111909927
 PrefabInstance:
   m_ObjectHideFlags: 0
