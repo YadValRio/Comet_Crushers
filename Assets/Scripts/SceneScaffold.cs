@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// Builds a minimal playable scene (ground, base, turret) at Play time
@@ -8,10 +9,24 @@ using UnityEngine;
 /// </summary>
 public static class SceneScaffold
 {
+    //runs after scene load to fully initilize scene
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
+    static void Initialize()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+        SceneManager.sceneLoaded += OnSceneLoaded;
+        Build();
+    }
+
+    static void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        Build();
+    }
+
     static void Build()
     {
-        if (Object.FindFirstObjectByType<TurretController>() != null) return;
+        PauseMenu.EnsureExists();
+        if (Object.FindAnyObjectByType<TurretController>() != null) return;
 
         Make(PrimitiveType.Plane, "Ground", new Vector3(0, 0, 0), new Vector3(8, 1, 8), new Color(0.15f, 0.17f, 0.2f));
         Make(PrimitiveType.Cube, "Base (placeholder)", new Vector3(0, 0.5f, 0), new Vector3(6, 1, 6), new Color(0.35f, 0.4f, 0.5f));

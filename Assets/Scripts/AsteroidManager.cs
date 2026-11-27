@@ -56,6 +56,8 @@ public class AsteroidManager : MonoBehaviour
 
     void Update()
     {
+        if (PauseMenu.IsPaused) return;
+
         activeAsteroids.RemoveAll(a => a == null);
 
         if (Time.time >= nextSpawnTime && activeAsteroids.Count < maxActiveAsteroids)
@@ -68,6 +70,11 @@ public class AsteroidManager : MonoBehaviour
     public void RegisterAsteroidDestroyed()
     {
         AsteroidsDestroyed++;
+    }
+
+    void OnDestroy()
+    {
+        if (Instance == this) Instance = null;
     }
 
     public void SpawnAsteroid()

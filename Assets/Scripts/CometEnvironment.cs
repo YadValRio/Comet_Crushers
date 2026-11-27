@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CometEnvironment : MonoBehaviour {
     private Material groundMaterial;
@@ -9,8 +10,18 @@ public class CometEnvironment : MonoBehaviour {
 
     //load the environment without changing the existing scene scripts
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
+    private static void Initialize() {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+        SceneManager.sceneLoaded += OnSceneLoaded;
+        loadEnvironment();
+    }
+
+    private static void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
+        loadEnvironment();
+    }
+
     private static void loadEnvironment() {
-        if (Object.FindFirstObjectByType<CometEnvironment>() != null) {
+        if (Object.FindAnyObjectByType<CometEnvironment>() != null) {
             return; //already loaded
         }
 
@@ -75,7 +86,7 @@ public class CometEnvironment : MonoBehaviour {
         }
 
         //use the scene's light if it already has one
-        Light sceneLight = Object.FindFirstObjectByType<Light>();
+        Light sceneLight = Object.FindAnyObjectByType<Light>();
         if (sceneLight == null) {
             GameObject lightObject = new GameObject("Environment Light");
             lightObject.transform.SetParent(transform, false);

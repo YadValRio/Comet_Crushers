@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 /// <summary>
 /// Player turret: mouse aims (yaw on this object, pitch on <see cref="head"/>),
 /// left mouse fires. The camera is a child of <see cref="head"/> so the player
-/// sees from the turret's perspective. Esc frees the cursor, click re-locks it.
+/// sees from the turret's perspective. Esc opens the pause menu.
 /// </summary>
 public class TurretController : MonoBehaviour
 {
@@ -28,16 +28,16 @@ public class TurretController : MonoBehaviour
     void Start()
     {
         startYaw = yaw = transform.eulerAngles.y;
-        LockCursor(true);
+        if (!PauseMenu.IsPaused) LockCursor(true);
     }
 
     void Update()
     {
+        if (PauseMenu.BlockGameplayInput) return;
+
         var mouse = Mouse.current;
-        var keyboard = Keyboard.current;
         if (mouse == null) return;
 
-        if (keyboard != null && keyboard.escapeKey.wasPressedThisFrame) LockCursor(false);
         if (Cursor.lockState != CursorLockMode.Locked)
         {
             if (mouse.leftButton.wasPressedThisFrame) LockCursor(true);
@@ -88,12 +88,14 @@ public class TurretController : MonoBehaviour
 
     void OnGUI()
     {
+        if (PauseMenu.IsPaused) return;
+
         // Simple crosshair
         float cx = Screen.width * 0.5f, cy = Screen.height * 0.5f;
         GUI.color = Color.white;
         GUI.DrawTexture(new Rect(cx - 8f, cy - 1f, 16f, 2f), Texture2D.whiteTexture);
         GUI.DrawTexture(new Rect(cx - 1f, cy - 8f, 2f, 16f), Texture2D.whiteTexture);
         if (Cursor.lockState != CursorLockMode.Locked)
-            GUI.Label(new Rect(cx - 90f, cy + 20f, 220f, 24f), "Click to aim (Esc frees mouse)");
+            GUI.Label(new Rect(cx - 90f, cy + 20f, 220f, 24f), "Click to aim (Esc pauses)");
     }
 }
