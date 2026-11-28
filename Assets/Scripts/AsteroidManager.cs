@@ -85,10 +85,10 @@ public class AsteroidManager : MonoBehaviour
         if (go.TryGetComponent<AsteroidController>(out var controller))
         {
             Vector3 targetPoint = new Vector3(
-                Random.Range(-8f, 8f),
-                Random.Range(1f, 6f),
-                Random.Range(-8f, 8f)
-            );
+            Random.Range(-2f, 2f),
+            0.5f,
+            Random.Range(-2f, 2f)
+    );
             Vector3 driftDir = (targetPoint - spawnPos).normalized;
             controller.Initialize(driftDir * Random.Range(minSpeed, maxSpeed), rotationSpeed);
         }

@@ -25,6 +25,37 @@ public class TurretController : MonoBehaviour
 
     float yaw, pitch, nextFireTime, startYaw;
 
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip shootingSound;
+
+    const string ShootingSoundResourcePath = "Audio/Gun_Sound";
+
+    void Awake() // Ensure we have an AudioSource and load the shooting sound
+    {
+        if (audioSource == null)
+        {
+            audioSource = GetComponent<AudioSource>();
+            if (audioSource == null)
+            {
+                audioSource = gameObject.AddComponent<AudioSource>();
+                audioSource.spatialBlend = 0f;
+            }
+        }
+
+        audioSource.playOnAwake = false;
+
+        if (shootingSound == null)
+        {
+            shootingSound = Resources.Load<AudioClip>(ShootingSoundResourcePath);
+            if (shootingSound == null)
+            {
+                Debug.LogError(
+                    $"Shooting sound not found at Assets/Resources/{ShootingSoundResourcePath}.",
+                    this);
+            }
+        }
+    }
+
     void Start()
     {
         startYaw = yaw = transform.eulerAngles.y;
@@ -64,6 +95,11 @@ public class TurretController : MonoBehaviour
 
     void Fire()
     {
+        if (shootingSound != null)
+        {
+            audioSource.PlayOneShot(shootingSound, 0.25f); // Play the shooting sound at a lower volume
+        }
+
         Transform aim = aimCamera != null ? aimCamera.transform : head;
         Vector3 spawn = aim.position + aim.forward * 1.5f;   // shots travel along the crosshair line
 

@@ -1,2 +1,15 @@
 fileFormatVersion: 2
 guid: 8bcb2aa05a35c4683894a73ef03aee87
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - head: {instanceID: 0}
+  - aimCamera: {instanceID: 0}
+  - audioSource: {instanceID: 0}
+  - shootingSound: {fileID: 8300000, guid: 220832ff96f98b643a576db016b4c7a5, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
