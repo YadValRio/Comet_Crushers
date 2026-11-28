@@ -14,7 +14,8 @@ public static class SceneScaffold
         if (Object.FindFirstObjectByType<TurretController>() != null) return;
 
         Make(PrimitiveType.Plane, "Ground", new Vector3(0, 0, 0), new Vector3(8, 1, 8), new Color(0.15f, 0.17f, 0.2f));
-        Make(PrimitiveType.Cube, "Base (placeholder)", new Vector3(0, 0.5f, 0), new Vector3(6, 1, 6), new Color(0.35f, 0.4f, 0.5f));
+        var baseObject = Make(PrimitiveType.Cube, "Base (placeholder)", new Vector3(0, 0.5f, 0), new Vector3(6, 1, 6), new Color(0.35f, 0.4f, 0.5f));
+        baseObject.AddComponent<BaseHealth>();
 
         var turret = new GameObject("Turret");
         turret.transform.position = new Vector3(0, 1f, 0);
